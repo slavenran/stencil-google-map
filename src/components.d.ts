@@ -5,17 +5,9 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
-import { ValidatorEntry } from "./components/user-form/validators/validator";
 export namespace Components {
     interface GoogleMapComponent {
         "apiKey": string;
-    }
-    interface UserForm {
-        "emailValidator": Array<string | ValidatorEntry>;
-        "genderValidator": Array<string | ValidatorEntry>;
-        "telephoneValidator": Array<string | ValidatorEntry>;
-        "usernameValidator": Array<string | ValidatorEntry>;
-        "zipValidator": Array<string | ValidatorEntry>;
     }
 }
 declare global {
@@ -25,31 +17,16 @@ declare global {
         prototype: HTMLGoogleMapComponentElement;
         new (): HTMLGoogleMapComponentElement;
     };
-    interface HTMLUserFormElement extends Components.UserForm, HTMLStencilElement {
-    }
-    var HTMLUserFormElement: {
-        prototype: HTMLUserFormElement;
-        new (): HTMLUserFormElement;
-    };
     interface HTMLElementTagNameMap {
         "google-map-component": HTMLGoogleMapComponentElement;
-        "user-form": HTMLUserFormElement;
     }
 }
 declare namespace LocalJSX {
     interface GoogleMapComponent {
         "apiKey"?: string;
     }
-    interface UserForm {
-        "emailValidator"?: Array<string | ValidatorEntry>;
-        "genderValidator"?: Array<string | ValidatorEntry>;
-        "telephoneValidator"?: Array<string | ValidatorEntry>;
-        "usernameValidator"?: Array<string | ValidatorEntry>;
-        "zipValidator"?: Array<string | ValidatorEntry>;
-    }
     interface IntrinsicElements {
         "google-map-component": GoogleMapComponent;
-        "user-form": UserForm;
     }
 }
 export { LocalJSX as JSX };
@@ -57,7 +34,6 @@ declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
             "google-map-component": LocalJSX.GoogleMapComponent & JSXBase.HTMLAttributes<HTMLGoogleMapComponentElement>;
-            "user-form": LocalJSX.UserForm & JSXBase.HTMLAttributes<HTMLUserFormElement>;
         }
     }
 }
