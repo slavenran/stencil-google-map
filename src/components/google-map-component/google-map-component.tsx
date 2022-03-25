@@ -13,18 +13,6 @@ export class GoogleMapComponent {
   public map: any;
   private mapElement: HTMLElement;
 
-  render() {
-    return <div ref={(el) => this.mapElement = el as HTMLElement} id='google-map-container'></div>;
-  }
-
-  componentDidLoad() {
-    this.init().then(() => {
-      console.log("Google Maps ready.")
-    }, (err) => {
-      console.log(err);
-    });
-  }
-
   init(): Promise<any> {
     return new Promise((resolve, reject) => {
       this.injectSDK().then(() => {
@@ -85,5 +73,17 @@ export class GoogleMapComponent {
         reject('Could not initialise map');
       });
     });
+  }
+
+  componentDidLoad() {
+    this.init().then(() => {
+      console.log("Google Maps ready.")
+    }, (err) => {
+      console.log(err);
+    });
+  }
+
+  render() {
+    return <div ref={(el) => this.mapElement = el as HTMLElement} id='google-map-container'></div>;
   }
 }
