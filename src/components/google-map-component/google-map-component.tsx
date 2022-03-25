@@ -70,13 +70,15 @@ export class GoogleMapComponent {
 
         // adds marker to user lat and lng
         let marker = new google.maps.Marker({
-          position: latLng,
           map: this.map,
+          position: latLng,
+          animation: 4,
           draggable: true
         })
 
         this.map.addListener("click", (mapsMouseEvent) => {
           marker.setPosition(mapsMouseEvent.latLng);
+          marker.setAnimation(4);
         })
         resolve(true);
       }, () => {
