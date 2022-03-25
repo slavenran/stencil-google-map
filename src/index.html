@@ -9,6 +9,15 @@
     <script nomodule src="/build/test-component.js"></script>
   </head>
   <body>
-    <google-map-component api-key="AIzaSyCWpaDDvVOu5MYHlARxvyJP88JdQLa200c"></google-map-component>
+    <style>
+      #map-container {
+        width: 900px;
+        height: 900px;
+        margin: auto;
+      }
+    </style>
+    <div id="map-container">
+      <google-map-component api-key="AIzaSyCWpaDDvVOu5MYHlARxvyJP88JdQLa200c"></google-map-component>
+    </div>
   </body>
 </html>

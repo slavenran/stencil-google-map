@@ -39,6 +39,7 @@ export class GoogleMapComponent {
     });
   }
 
+  // dynamically creates google maps import and mapInit function
   injectSDK(): Promise<any> {
     return new Promise((resolve) => {
       window['mapInit'] = () => {
@@ -57,13 +58,26 @@ export class GoogleMapComponent {
 
   initMap(): Promise<any> {
     return new Promise((resolve, reject) => {
+      // centers map at user current position
       Geolocation.getCurrentPosition().then((position) => {
-        let latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-        let mapOptions = {
+        const latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+        const mapOptions = {
           center: latLng,
-          zoom: 15
+          zoom: 15,
+          draggableCursor: 'default'
         };
         this.map = new google.maps.Map(this.mapElement, mapOptions);
+
+        // adds marker to user lat and lng
+        let marker = new google.maps.Marker({
+          position: latLng,
+          map: this.map,
+          draggable: true
+        })
+
+        this.map.addListener("click", (mapsMouseEvent) => {
+          marker.setPosition(mapsMouseEvent.latLng);
+        })
         resolve(true);
       }, () => {
         reject('Could not initialise map');
